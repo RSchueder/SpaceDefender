@@ -5,15 +5,17 @@ using UnityEngine;
 public class Spaceship : MonoBehaviour {
     [SerializeField] float speed;
     [SerializeField] float padding;
-    [SerializeField] float check;
-    public GameObject laser1;
+    [SerializeField] float health;
+    public GameObject projectile;
 
-    float movement;
+    public float beamSpeed = 1;
+    public float firingRate = 0.2f;
+
     float xmin;
     float xmax;
     float ymin;
     float ymax;
-	// Use this for initialization
+
 	void Start () {
         float distance = transform.position.z - Camera.main.transform.position.z;
         Vector3 leftmost = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, distance));
@@ -24,8 +26,26 @@ public class Spaceship : MonoBehaviour {
         ymin = leftmost.y + padding;
         ymax = topmost.y - padding;
     }
+    private void Fire()
+    {
+        GameObject laserBeam = Instantiate(projectile, transform.position + new Vector3(0, 0, -1), Quaternion.identity) as GameObject;
+        laserBeam.GetComponent<Rigidbody2D>().velocity = new Vector3(0, beamSpeed, 0);
+    }
 
-    // Update is called once per frame
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        EnemyProjectile missle = collider.gameObject.GetComponent<EnemyProjectile>();
+        if (missle)
+        {
+            health -= missle.GetDamage();
+            if (health <= 0)
+            {
+                Destroy(gameObject);
+            }
+            missle.Hit();
+        }
+    }
+
     void Update ()
     {
         if (Input.GetKey(KeyCode.UpArrow))
@@ -44,11 +64,18 @@ public class Spaceship : MonoBehaviour {
         {
             transform.position += Vector3.right * speed * Time.deltaTime;
         }
+
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, xmin, xmax), Mathf.Clamp(transform.position.y, ymin, ymax),0);
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            GameObject laserBeam = Instantiate(laser1, transform.position, Quaternion.identity) as GameObject;
+            InvokeRepeating("Fire",0.00001f, firingRate);
+        }
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            CancelInvoke("Fire");
         }
     }
+
 }
 

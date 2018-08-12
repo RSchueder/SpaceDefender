@@ -7,8 +7,6 @@ public class EnemySpawner : MonoBehaviour {
     public float width = 10f;
     public float height = 5f;
     private bool movingRight = true;
-    int ii = 0;
-    Vector3 randVect = new Vector3(0, 0, 0);
     [SerializeField] float speed;
     [SerializeField] float padding;
 
@@ -62,22 +60,6 @@ public class EnemySpawner : MonoBehaviour {
             movingRight = false;
         }
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, xmin, xmax), Mathf.Clamp(transform.position.y, ymin, ymax), 0);
-
-        /*
-        if (ii == 5)
-        {
-            randVect = new Vector3(speed * Time.deltaTime *UnityEngine.Random.Range(-1, 1), speed * Time.deltaTime * UnityEngine.Random.Range(-1, 1), 0);
-            ii = 0;
-        }
-        else
-        {
-            ii = ii + 1;
-            transform.position += randVect;
-        }
-        Debug.Log(ii);
-        */
-
-
 
     }
 }
