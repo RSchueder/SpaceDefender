@@ -11,8 +11,12 @@ public class EnemyBehavior : MonoBehaviour {
 
     private void Start()
     {
-        InvokeRepeating("Fire", 2f, firingRate);
+        //InvokeRepeating("Fire", 1f, firingRate);
 
+    }
+    private void Update()
+    {
+        ProbFire();
     }
     void OnTriggerEnter2D(Collider2D collider)
     {
@@ -43,5 +47,13 @@ public class EnemyBehavior : MonoBehaviour {
     {
         GameObject laserBeam = Instantiate(laser, transform.position + new Vector3(0, 0, -1), Quaternion.identity) as GameObject;
         laserBeam.GetComponent<Rigidbody2D>().velocity = new Vector3(0, -beamSpeed, 0);
+    }
+    private void ProbFire()
+    {
+        float probability = firingRate * Time.deltaTime;
+        if (UnityEngine.Random.value < probability)
+        {
+            Fire();
+        }
     }
 }

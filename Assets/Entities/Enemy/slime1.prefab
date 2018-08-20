@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 50007797278946360}
   - component: {fileID: 60415673565848146}
   - component: {fileID: 114090480637080056}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: slime1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,8 +135,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laser: {fileID: 1941326846235458, guid: ed1a02b950baead49a2fc6f56d96492b, type: 2}
-  beamSpeed: 10
-  firingRate: 1
+  beamSpeed: 8
+  firingRate: 0.5
 --- !u!212 &212071347475706540
 SpriteRenderer:
   m_ObjectHideFlags: 1

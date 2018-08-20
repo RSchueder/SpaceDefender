@@ -28,7 +28,7 @@ public class Spaceship : MonoBehaviour {
     }
     private void Fire()
     {
-        GameObject laserBeam = Instantiate(projectile, transform.position + new Vector3(0, 0, -1), Quaternion.identity) as GameObject;
+        GameObject laserBeam = Instantiate(projectile, transform.position + new Vector3(0, 0, 1), Quaternion.identity) as GameObject;
         laserBeam.GetComponent<Rigidbody2D>().velocity = new Vector3(0, beamSpeed, 0);
     }
 
