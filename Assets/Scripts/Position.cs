@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Position : MonoBehaviour {
-
+    [SerializeField] float rad;
 	// Use this for initialization
 	void Start () {
 		
@@ -15,6 +15,6 @@ public class Position : MonoBehaviour {
 	}
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position, 1);
+        Gizmos.DrawWireSphere(transform.position, rad);
     }
 }

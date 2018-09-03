@@ -5,9 +5,16 @@ using UnityEngine;
 public class Spaceship : MonoBehaviour {
     [SerializeField] float speed;
     [SerializeField] float padding;
-    [SerializeField] float health;
-    public GameObject projectile;
+    [SerializeField] public float health;
+    [SerializeField] AudioClip[] shipFire;
+    [SerializeField] AudioClip[] shipDamage;
+    [SerializeField] AudioClip[] shipDeath;
 
+
+    public GameObject projectile;
+    Thruster thruster;
+    LifeBar lifeBar;
+    AudioSource myAudioSource;
     public float beamSpeed = 1;
     public float firingRate = 0.2f;
 
@@ -25,10 +32,16 @@ public class Spaceship : MonoBehaviour {
         xmax = rightmost.x - padding;
         ymin = leftmost.y + padding;
         ymax = topmost.y - padding;
+        thruster = FindObjectOfType<Thruster>();
+        lifeBar = FindObjectOfType<LifeBar>();
+        myAudioSource = GetComponent<AudioSource>();
+
     }
     private void Fire()
     {
-        GameObject laserBeam = Instantiate(projectile, transform.position + new Vector3(0, 0, 1), Quaternion.identity) as GameObject;
+        GameObject laserBeam = Instantiate(projectile, transform.position + new Vector3(0, 0, -1), Quaternion.identity) as GameObject;
+        AudioClip clip = shipFire[0];
+        AudioSource.PlayClipAtPoint(clip,transform.position);
         laserBeam.GetComponent<Rigidbody2D>().velocity = new Vector3(0, beamSpeed, 0);
     }
 
@@ -38,8 +51,14 @@ public class Spaceship : MonoBehaviour {
         if (missle)
         {
             health -= missle.GetDamage();
+            lifeBar.LoseHealth();
+            AudioClip dClip = shipDamage[0];
+            AudioSource.PlayClipAtPoint(dClip, transform.position);
             if (health <= 0)
             {
+                thruster.RemoveThruster();
+                AudioClip clip = shipDeath[0];
+                AudioSource.PlayClipAtPoint(clip, transform.position);
                 Destroy(gameObject);
             }
             missle.Hit();
@@ -76,6 +95,9 @@ public class Spaceship : MonoBehaviour {
             CancelInvoke("Fire");
         }
     }
-
+    public void Reset()
+    {
+        health = 500;
+    }
 }
 

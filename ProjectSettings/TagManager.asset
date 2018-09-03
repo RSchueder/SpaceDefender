@@ -41,3 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: EnemyProjectiles
+    uniqueID: 732178339
+    locked: 0
+  - name: Enemies
+    uniqueID: 2380345059
+    locked: 0
+  - name: SpaceshipProjectiles
+    uniqueID: 2970126337
+    locked: 0
+  - name: Spaceship
+    uniqueID: 128946285
+    locked: 0
+  - name: Explosions
+    uniqueID: 2470421869
+    locked: 0
