@@ -26,7 +26,7 @@ public class ScoreKeeper : MonoBehaviour {
         scoreText.text = score.ToString();
         if(spaceship.health <= 0)
         {
-            sceneLoader.Restart();
+            sceneLoader.Lose();
             Reset();
         }
     }

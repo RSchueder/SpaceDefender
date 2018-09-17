@@ -9,6 +9,7 @@ public class EnemySpawner : MonoBehaviour
     public float width = 10f;
     public float height = 5f;
     private bool movingRight = true;
+    private bool movingDown = true;
     float spawnDelay = 0.5f;
     [SerializeField] float speed;
     [SerializeField] float padding;
@@ -94,7 +95,9 @@ public class EnemySpawner : MonoBehaviour
             movingRight = false;
         }
 
+
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, xmin, xmax), Mathf.Clamp(transform.position.y, ymin, ymax), 0);
+
         
         if(AllMembersDead())
         {

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Spaceship : MonoBehaviour {
     [SerializeField] float speed;
@@ -9,7 +10,6 @@ public class Spaceship : MonoBehaviour {
     [SerializeField] AudioClip[] shipFire;
     [SerializeField] AudioClip[] shipDamage;
     [SerializeField] AudioClip[] shipDeath;
-
 
     public GameObject projectile;
     Thruster thruster;
